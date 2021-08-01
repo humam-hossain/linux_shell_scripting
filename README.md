@@ -1,14 +1,3 @@
-# Shell Script
-
-Shell Script is a file that contains a series of linux commands and shell statements. It's made up of plain text meaning ascii text.
-
-* shell scripts **eliminate repetitive tasks throught automation**.
-* if you have to do a task more than once, but it's something that rarely done. It's worth to make a shell script for it.
-* if you are making notes that's a good sign that there's an easier way to do it.
-* **speed of development is the main reason to use shell script rather than a compiled program.**
-* performance & efficiency. The tradeoff is worth it when the shell script runs fast enough for the intended purpose.
-* anything you can do at the command line can be automated with a shell script.
-
 # Virtualization Software
 
 Virtualization Softwares allows you to run an **unmodified operating system** with all of its **installed software** in a special environment on top of existing operating system. This special environment called a virtual machine is created by virtualization software by intercepting access to certain hardware components and certain features.
@@ -137,3 +126,179 @@ Vagrant.configure(2) do |config|
     end
 end
 ```
+
+```bash
+vagrant up              # run multiple vm
+vagrant ssh server1     # connect to server1
+```
+
+While connecting to server1 communicate with server2
+
+```bash
+ping 10.2.3.5
+```
+
+# Shell Script
+
+Shell Script is a file that contains a series of linux commands and shell statements. It's made up of plain text meaning ascii text.
+
+* shell scripts **eliminate repetitive tasks throught automation**.
+* if you have to do a task more than once, but it's something that rarely done. It's worth to make a shell script for it.
+* if you are making notes that's a good sign that there's an easier way to do it.
+* **speed of development is the main reason to use shell script rather than a compiled program.**
+* performance & efficiency. The tradeoff is worth it when the shell script runs fast enough for the intended purpose.
+* anything you can do at the command line can be automated with a shell script.
+
+***syntex of a shell script***
+
+```bash
+#!/bin/bash         ## /bin/bash <FILENAME> get executed
+
+# commands
+```
+
+> \# = Sharp
+>
+> ! = bang
+>
+> #! = Shebang
+
+## Bash basics
+
+* bash file don't need to be end with .sh.
+* ```./``` here dot represents present directory. forward-slash is directory seperator.
+
+```bash
+-rw-r--r-- 1 vagrant vagrant    0 Aug  1 14:01 blah.sh  # do not have execute permission
+./blah.sh
+-bash: ./blah.sh: Permission denied
+```
+
+
+### Comments
+
+* ```#``` is used for single line comment.
+
+### chmod - change files mode bits
+
+```bash
+chmod +x <filename>     # owners executable permission granted
+```
+
+* r = 4, w = 2, x = 1
+
+```bash
+chmod 755 <filename>
+
+# r = 4, w = 2, x = 1
+
+# for current user/owner
+## 7 = 4 + 2 + 1
+##     r + w + x
+
+# for group
+## 5 = 4 + 1
+##     r + x
+
+# for others
+## 5 = 4 + 1
+##     r + x
+
+```
+
+### mv - move (rename) files
+
+```bash
+mv old_name rename
+```
+
+### type - shell commands type
+
+```bash
+type shell-command
+```
+
+### echo - print characters
+
+* echo is a shell builin.
+* if you want to echo exact same text within quotes use single quotes.
+* if u want to interpret variables while echoing then use double-quotes.
+
+```bash
+type -a echo
+
+# output
+## echo is a shell builtin
+## echo is /usr/bin/echo
+```
+
+```bash
+echo "message1"
+/usr/bin/echo "message2"
+
+# output
+# message1
+# message2
+```
+
+### help - show help of a command
+
+```bash
+help <command>
+
+help echo       # shows echo help page
+```
+
+* this command only shows shell builtin commands help page.
+* u need to use -h/man for non-builtin commands.
+* to exit from man page press 'q'.
+
+```bash
+man <command>
+<command> -h        # non-shell builtin command
+
+uptime -h
+```
+
+### bash variable
+
+**syntex**
+
+```bash
+variable='value'    # no space between equal sign.
+```
+
+* no space between equal sign of a variable.
+* to use variable use '$' (dollar sign) as prefix.
+* '{}' curley braces is required to append text to variable.
+* if a variable is not found then the variable place would be blank, it won't do anything.
+
+#### variable reassingment/ changing value of a variable
+
+```bash
+variable='value'
+
+variable='changed_value'
+```
+
+```bash
+variable='value'
+
+echo "$variable"
+
+# output
+## value
+
+echo '$variable'
+
+# output
+## $variable
+
+echo "${variable}able"
+
+# output
+## valueable
+
+variable='valu'     # reassingment
+```
+
