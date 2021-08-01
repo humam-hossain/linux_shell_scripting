@@ -1,3 +1,4 @@
 git add *
-git commit -m "update"
+now=$(date)
+git commit -m "updated on $date"
 git push
