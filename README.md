@@ -1,23 +1,23 @@
 # Shell Script
 
-Shell Script is a file that contains a series of linux commands and shell statements. It's made up of plain text meaning ascii text. 
+Shell Script is a file that contains a series of linux commands and shell statements. It's made up of plain text meaning ascii text.
 
-* shell scripts eliminate repetitive tasks throught automation.
-* have to do a task more than once, but it's something that rarely done. It's worth to make a shell script for it.
+* shell scripts **eliminate repetitive tasks throught automation**.
+* if you have to do a task more than once, but it's something that rarely done. It's worth to make a shell script for it.
 * if you are making notes that's a good sign that there's an easier way to do it.
-* speed of development is the main reason to use shell script rather than a compiled program.
-* performance & efficiency. The tradeoff is worth it when the shell script runs fast enough for the intended purpose
+* **speed of development is the main reason to use shell script rather than a compiled program.**
+* performance & efficiency. The tradeoff is worth it when the shell script runs fast enough for the intended purpose.
 * anything you can do at the command line can be automated with a shell script.
 
 # Virtualization Software
 
-Virtualization Softwares allows you to run an unmodified operating system with all of its installed software in a special environment on top of existing operating system. This special environment called a virtual machine is created by virtualization software by intercepting access to certain hardware components and certain features.
+Virtualization Softwares allows you to run an **unmodified operating system** with all of its **installed software** in a special environment on top of existing operating system. This special environment called a virtual machine is created by virtualization software by intercepting access to certain hardware components and certain features.
 
 * Provides full virtualization
 * Creates virtual machines.
-* Physical computer = host
-* virtual computer = guest
-* guest OS thinks it's using real hardware. It allows to perform destructive actions inside the virtual machine and those actions are contained inside of that virtual machine and won't interfere with your actual physical computer.
+* **Physical computer = host**
+* **virtual computer = guest**
+* **guest OS thinks it's using real hardware**. It allows to perform destructive actions inside the virtual machine and those actions are contained inside of that virtual machine and won't interfere with your actual physical computer.
 
 # Vagrant
 
@@ -25,7 +25,7 @@ Vagrant is a command line tool to automate the creation of a virtual machine.
 
 * easy to configure, reproducible environments.
 * Provisions virtualbox virtual machines.
-* Box = Operating System Image
+* **Box** = Operating System Image
 
 ```bash
 # syntex
@@ -35,7 +35,7 @@ vagrant box add USER/BOX
 vagrant box add jasonc/centos7
 ```
 
-* Vagrant project = Folder with a Vagrantfile.
+* **Vagrant project** = Folder with a Vagrantfile.
 
 ```bash
 mkdir vm1
@@ -49,7 +49,7 @@ vagrant up      # vagrant will import the box into virtualbox and start it.
 # if vagrant detects that the virtual machine already exists in virtualbos it will just simply start it.
 ```
 
-* The virtual machine is started in headless mode meaning there is no user interface for the machine visible on local host(physical computer) machine.
+* The virtual machine is started in **headless mode** meaning there is no user interface for the machine visible on **local host(physical computer) machine**.
 
 ## Vagrant Up/Multi-machine
 
@@ -90,6 +90,9 @@ created when initializing vagrant project.
 
 ```bash
 vagrant init USER/BOX
+
+# Output
+# Vagrantfile in the project folder.
 ```
 
 This file contains:
