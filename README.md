@@ -77,6 +77,7 @@ exit
 ```bash
 vagrant halt [VM_NAME]          # stops the vm
 vagrant up [VM_NAME]            # starts the vm
+vagrant reload [VM_NAME]        # halt then up command
 
 vagrant suspend [VM_NAME]       # suspends the vm
 vagrant resume [VM_NAME]        # resumes the vm
@@ -84,7 +85,7 @@ vagrant resume [VM_NAME]        # resumes the vm
 vagrant destroy [VM_NAME]       # removes the vm
 ```
 
-## Vagrantfile
+## Vagrantfile - Configuration file
 
 created when initializing vagrant project.
 
@@ -116,6 +117,8 @@ Vagrant.configure(2) do |config|
     end
 end                                     
 ```
+
+> Default VM hostname = localhost
 
 ### multi-machine setup
 
