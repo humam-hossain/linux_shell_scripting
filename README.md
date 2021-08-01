@@ -93,6 +93,7 @@ vagrant init USER/BOX
 ```
 
 This file contains:
+
 ```bash
 # all the configuration starts from here
 Vagrant.configure(2) do |config|
