@@ -174,10 +174,66 @@ Shell Script is a file that contains a series of linux commands and shell statem
 -bash: ./blah.sh: Permission denied
 ```
 
-
 ### Comments
 
 * ```#``` is used for single line comment.
+
+### bash variable
+
+**syntex**
+
+```bash
+variable='value'    # no space between equal sign.
+```
+
+* no space between equal sign of a variable.
+* to use variable use '$' (dollar sign) as prefix.
+* '{}' curley braces is required to append text to variable.
+* if a variable is not found then the variable place would be blank, it won't do anything.
+
+#### variable reassingment/ changing value of a variable
+
+```bash
+variable='value'
+
+variable='changed_value'
+```
+
+```bash
+variable='value'
+
+echo "$variable"
+
+# output
+## value
+
+echo '$variable'
+
+# output
+## $variable
+
+echo "${variable}able"
+
+# output
+## valueable
+
+variable='valu'     # reassingment
+```
+
+### Special Variable
+
+There are some special variable that are predefined by bash.
+
+* **UID** = Expands to the user ID of the current user, initialized at shell startup.  This variable is readonly.
+
+### Assinging Command Ouput in a variable
+
+**Syntex**
+
+```bash
+    VARIABLE=$(shell_command)
+    VARIABLE=`shell_command`    # legacy style
+```
 
 ### chmod - change files mode bits
 
@@ -260,45 +316,84 @@ man <command>
 uptime -h
 ```
 
-### bash variable
+### man - an interface to the on-line reference manuals
 
-**syntex**
+* [Option] - third brackets means optionals.
+* ... - referred as ellipsis means multiple.
 
-```bash
-variable='value'    # no space between equal sign.
-```
+### id - print real and effective user and group IDs
 
-* no space between equal sign of a variable.
-* to use variable use '$' (dollar sign) as prefix.
-* '{}' curley braces is required to append text to variable.
-* if a variable is not found then the variable place would be blank, it won't do anything.
-
-#### variable reassingment/ changing value of a variable
+***SYNOPSIS***
 
 ```bash
-variable='value'
-
-variable='changed_value'
+    id [OPTION]... [USER]
 ```
+
+* [OPTION] - optional not mandatory
+* ... - three dots referred as ellipsis, means you can specify multiple options.
+* [USER] - one option user only.
+* -n, --name = print a name instead of a number, for -ugG.
+* -u, --user = print only the effective user ID.
+
+### whoami - print effective userid
+
+**DESCRIPTION**
+       Print  the  user  name associated with the current effective user
+       ID.  Same as id -un.
+**SYNOPSIS**
 
 ```bash
-variable='value'
-
-echo "$variable"
-
-# output
-## value
-
-echo '$variable'
-
-# output
-## $variable
-
-echo "${variable}able"
-
-# output
-## valueable
-
-variable='valu'     # reassingment
+    whoami [OPTION]...
 ```
 
+* [OPTION] - optional not mandatory
+* ... - three dots referred as ellipsis, means you can specify multiple options.
+
+## Conditionals
+
+### if statement
+
+**Syntex**
+
+```bash
+if [[ <expression> ]]
+then
+    # commands
+else
+    # commands
+fi
+
+if COMMANDS; then COMMANDS; [ elif COMMANDS; then COMMANDS; ]... [ else COMMANDS; ] fi
+# ; semi-colons are command seperators.
+```
+
+**Type**
+
+```bash
+type -a if 
+
+# if is a shell keyword
+```
+
+* if is a shell keyword so we can use help keyword.
+
+> ; semi-colons are command seperators.
+
+### [[ ... ]]: [[ expression ]] - Execute conditional command.
+
+Returns a status of 0 or 1 depending on the evaluation of the conditional.
+
+**Type**
+
+```bash
+type -a [[
+# [[ is a shell keyword
+
+help [[     # for manuals
+```
+
+Exit Status:
+0 or 1 depending on value of EXPRESSION.
+
+* 0 = true
+* 1 = false
