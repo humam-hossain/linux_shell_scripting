@@ -225,6 +225,7 @@ variable='valu'     # reassingment
 There are some special variable that are predefined by bash.
 
 * **UID** = Expands to the user ID of the current user, initialized at shell startup.  This variable is readonly.
+* **?** = It holds the exit status of the last command.
 
 ### Assinging Command Ouput in a variable
 
@@ -349,6 +350,32 @@ uptime -h
 * [OPTION] - optional not mandatory
 * ... - three dots referred as ellipsis, means you can specify multiple options.
 
+### exit
+
+Exits the shell with a status of N.  If N is omitted, the exit status is that of the last command executed.
+
+**Syntex**
+
+```bash
+    exit [n]
+```
+
+**Type**
+
+```bash
+type -a exit
+# exit is a shell builtin
+```
+
+### Equal Sign (=)
+
+* ```=``` is used for variable assignment.
+* it can be used for exact match between two strings.
+
+### Double Equal Sign (==)
+
+* ```==``` is used for pattern matching.
+
 ## Conditionals
 
 ### if statement
@@ -379,7 +406,7 @@ type -a if
 
 > ; semi-colons are command seperators.
 
-### [[ ... ]]: [[ expression ]] - Execute conditional command.
+### \[[ ... ]]: \[[ expression ]] - Execute conditional command.
 
 Returns a status of 0 or 1 depending on the evaluation of the conditional.
 
@@ -397,3 +424,22 @@ Exit Status:
 
 * 0 = true
 * 1 = false
+
+### test - Evaluate conditional expression
+
+Exits with a status of 0 (true) or 1 (false) depending on
+the evaluation of EXPR.
+
+**Syntex**
+
+```bash
+    test [expr]
+```
+
+**Type**
+
+```bash
+type -a test
+#test is a shell builtin
+#test is /usr/bin/test
+```
