@@ -281,13 +281,7 @@ type shell-command
 * if you want to echo exact same text within quotes use single quotes.
 * if u want to interpret variables while echoing then use double-quotes.
 
-```bash
-type -a echo
-
-# output
-## echo is a shell builtin
-## echo is /usr/bin/echo
-```
+**Type** : echo is a shell builtin. echo is /usr/bin/echo
 
 ```bash
 echo "message1"
@@ -360,12 +354,7 @@ Exits the shell with a status of N.  If N is omitted, the exit status is that of
     exit [n]
 ```
 
-**Type**
-
-```bash
-type -a exit
-# exit is a shell builtin
-```
+**Type** : exit is a shell builtin
 
 ### Equal Sign (=)
 
@@ -394,13 +383,7 @@ if COMMANDS; then COMMANDS; [ elif COMMANDS; then COMMANDS; ]... [ else COMMANDS
 # ; semi-colons are command seperators.
 ```
 
-**Type**
-
-```bash
-type -a if 
-
-# if is a shell keyword
-```
+**Type** : if is a shell keyword
 
 * if is a shell keyword so we can use help keyword.
 
@@ -410,14 +393,7 @@ type -a if
 
 Returns a status of 0 or 1 depending on the evaluation of the conditional.
 
-**Type**
-
-```bash
-type -a [[
-# [[ is a shell keyword
-
-help [[     # for manuals
-```
+**Type** : [[ ]] is a shell keyword
 
 Exit Status:
 0 or 1 depending on value of EXPRESSION.
@@ -436,10 +412,75 @@ the evaluation of EXPR.
     test [expr]
 ```
 
-**Type**
+**Type**: test is a shell builtin. test is a command located at /usr/bin/test.
+
+### exec - Replace the shell with the given command.
+
+Execute COMMAND, replacing this shell with the specified program. ARGUMENTS become the arguments to COMMAND. If COMMAND is not specified, any redirections take effect in the current shell.
+**Syntex**
 
 ```bash
-type -a test
-#test is a shell builtin
-#test is /usr/bin/test
+exec [-cl] [-a name] [command [arguments ...]] [redirection ...]
 ```
+
+**Type** : exec is a shell builtin.
+
+```bash
+    exec zsh    # run zsh shell
+```
+
+### read - Read a line from the standard input
+
+Read a line from the standard input and split it into fields.
+
+> Standard input means the input comes from the keyboard. but an input can come from various input devices.
+>
+> Standard output & standard error mean output/error displayed on the monitor.
+
+**Syntex**
+
+```bash
+read [-ers] [-a array] [-d delim] [-i text] [-n nchars] [-N nchars] [-p prompt] [-t timeout] [-u fd] [name ...]
+```
+
+**Type**: read is a shell builtin. read is /usr/bin/read.
+
+* **-p prompt** = output the string PROMPT without a trailing newline before attempting to read.
+
+```bash
+read -p "Type something: " THING
+# Type something: something
+
+echo ${THING}
+# something
+```
+
+## Local User
+
+* Only root user can create local users/add users.
+
+### useradd - create a new user or update default new user information
+
+**SYNOPSIS**
+
+```bash
+    useradd [options] LOGIN
+
+    useradd -D
+
+    useradd -D [options]
+```
+
+* usernames/logins have typically 8 characters or less by convention. 
+* When invoked without the -D option, the useradd command creates a new user account using the values specified on the command line plus the default values from the system.
+* **-c, --comment** = COMMENT. usually used for user's real name.
+
+### su - Suspend shell execution
+
+**Syntex**
+
+```bash
+    suspend [-f]
+```
+
+**Type** : su is /bin/su. su is /usr/bin/su.
