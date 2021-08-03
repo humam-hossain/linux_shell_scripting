@@ -163,6 +163,14 @@ Shell Script is a file that contains a series of linux commands and shell statem
 >
 > #! = Shebang
 
+## Bash Symbols
+
+### Pipe symbol ( | )
+
+when you use a pipe symbol on a command line it means take the standard output from the preceding command, the command that goes before the pipe, and pass it as the standard input to the following command or the command that comes after the pipe.
+
+if the first command displays error messages those will not be passed to the second command. error messages are called standard error.
+
 ## Bash basics
 
 * bash file don't need to be end with .sh.
@@ -356,14 +364,15 @@ Exits the shell with a status of N.  If N is omitted, the exit status is that of
 
 **Type** : exit is a shell builtin
 
-### Equal Sign (=)
+### su - Suspend shell execution
 
-* ```=``` is used for variable assignment.
-* it can be used for exact match between two strings.
+**Syntex**
 
-### Double Equal Sign (==)
+```bash
+    suspend [-f]
+```
 
-* ```==``` is used for pattern matching.
+**Type** : su is /bin/su. su is /usr/bin/su.
 
 ## Conditionals
 
@@ -433,7 +442,7 @@ exec [-cl] [-a name] [command [arguments ...]] [redirection ...]
 
 Read a line from the standard input and split it into fields.
 
-> Standard input means the input comes from the keyboard. but an input can come from various input devices.
+> Standard input means the input comes from the keyboard by default. but an input can come from various input devices. Standard input can come from another command when it's used & it's called a pipeline ( | ).
 >
 > Standard output & standard error mean output/error displayed on the monitor.
 
@@ -455,9 +464,19 @@ echo ${THING}
 # something
 ```
 
+### Equal Sign (=)
+
+* ```=``` is used for variable assignment.
+* it can be used for exact match between two strings.
+
+### Double Equal Sign (==)
+
+* ```==``` is used for pattern matching.
+
 ## Local User
 
 * Only root user can create local users/add users.
+* **/etc/login.defs** - local user configuration file
 
 ### useradd - create a new user or update default new user information
 
@@ -475,12 +494,15 @@ echo ${THING}
 * When invoked without the -D option, the useradd command creates a new user account using the values specified on the command line plus the default values from the system.
 * **-c, --comment** = COMMENT. usually used for user's real name.
 
-### su - Suspend shell execution
+### passwd - update user's authentication tokens
 
-**Syntex**
+The  passwd  utility  is  used  to  update  user's
+authentication token(s).
+**SYNOPSIS**
 
 ```bash
-    suspend [-f]
+    passwd  [-k] [-l] [-u [-f]] [-d] [-e] [-n mindays] [-x maxdays] [-w warndays] [-i inactivedays]  [-S] [--stdin] [username]
 ```
 
-**Type** : su is /bin/su. su is /usr/bin/su.
+* **--stdin** : This option is used to indicate that passwd should  read the new password from standard input, which can be a pipe.
+* **-e, --expire** : This is a quick way to  expire  a  password for  an account. The user will be forced to change the password during the  next  login attempt.  Available to root only.
