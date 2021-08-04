@@ -182,6 +182,18 @@ if the first command displays error messages those will not be passed to the sec
 -bash: ./blah.sh: Permission denied
 ```
 
+### bash - GNU Bourne-Again SHell
+
+Bash is an **sh**-compatible command  language  interpreter  that executes commands read from the standard input or from a file.
+
+**SYNOPSIS**
+
+```bash
+    bash [options] [file]
+```
+
+* commands and bash variables.
+
 ### Comments
 
 * ```#``` is used for single line comment.
@@ -234,6 +246,8 @@ There are some special variable that are predefined by bash.
 
 * **UID** = Expands to the user ID of the current user, initialized at shell startup.  This variable is readonly.
 * **?** = It holds the exit status of the last command.
+* **HOSTNAME** = contains name of the host.
+* **RANDOM** = Each time this parameter is  referenced,  a random  integer between **0 and 32767** is generated. The sequence of random numbers maybe initialized by assigning a value to **RANDOM**.
 
 ### Assinging Command Ouput in a variable
 
