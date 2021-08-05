@@ -520,3 +520,16 @@ authentication token(s).
 
 * **--stdin** : This option is used to indicate that passwd should  read the new password from standard input, which can be a pipe.
 * **-e, --expire** : This is a quick way to  expire  a  password for  an account. The user will be forced to change the password during the  next  login attempt.  Available to root only.
+
+### date - print or set the system date and time
+
+Display  the  current time in the given FORMAT, or set the system date.
+**SYNOPSIS**
+
+```bash
+    date [OPTION]... [+FORMAT]
+    date [-u|--utc|--universal] [MMDDhhmm[[CC]YY][.ss]]
+```
+
+* **%s** = seconds since 1970-01-01 00:00:00 UTC. It's a format.
+* **%N** = nanoseconds (000000000..999999999). It's a format.
