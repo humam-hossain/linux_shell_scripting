@@ -194,6 +194,22 @@ Bash is an **sh**-compatible command  language  interpreter  that executes comma
 
 * commands and bash variables.
 
+### COMMAND EXECUTION
+
+After a command has been split into words, if it results in a simple command and an optional list of arguments, the following actions are taken.
+
+If the command name contains no slashes, the shell attempts to locate it. If  there  exists a shell function by that name, that function is invoked
+If the name does not match a  function, the  shell  searches for it in the list of shell builtins.  If a match is found, that builtin is invoked.
+
+If the name is neither a shell function nor a builtin,  and  contains  no slashes,  **bash** searches each element of the **PATH** for a directory containing an executable file by that name.  **Bash** uses a **hash** table to  remember the full pathnames of executable files.
+A full search of the directories in PATH is performed only if the command is not found in the hash table.  If the search is unsuccessful, the shell searches for a defined shell function named **command_not_found_handle**. If that function exists, it is invoked with the original command and the original command's arguments as its arguments, and the function's exit status becomes the exit status of the shell. If that function is not defined, the shell prints an error message and returns an **exit status of 127**.
+
+If the search is successful, or if the command name contains one or more slashes, the shell executes the named program in a separate execution environment. Argument  0  is  set  to the name given, and the remaining arguments to the command are set to the arguments given, if any.
+
+If this execution fails because the file is not in executable format, and the  file  is not a directory, it is assumed to be a shell script, a file containing shell commands.  A subshell is spawned to  execute  it. This subshell  reinitializes  itself,  so that the effect is as if a new shell had been invoked to handle the script, with the exception that the  locations  of  commands  remembered by the parent are retained by the child.
+
+If the program is a file beginning with #!, the remainder  of  the  first line  specifies  an  interpreter for the program.  The shell executes the specified interpreter on operating systems that do not handle  this  executable format themselves.  The arguments to the interpreter consist of a single optional argument following the interpreter name on the first line of the program, followed by the name of the program, followed by the command arguments, if any.
+
 ### Comments
 
 * ```#``` is used for single line comment.
@@ -248,6 +264,13 @@ There are some special variable that are predefined by bash.
 * **?** = It holds the exit status of the last command.
 * **HOSTNAME** = contains name of the host.
 * **RANDOM** = Each time this parameter is  referenced,  a random  integer between **0 and 32767** is generated. The sequence of random numbers maybe initialized by assigning a value to **RANDOM**.
+* **PATH** = The search path for commands.  It is  a  colon-separated  list  of directories  in  which  the  shell looks for commands. 
+
+### Special Parameters
+
+The shell treats several parameters specially.  These parameters may only be referenced; assignment to them is not allowed.
+
+* **#** = Expands to the number of positional parameters in decimal.
 
 ### Assinging Command Ouput in a variable
 
@@ -297,6 +320,21 @@ mv old_name rename
 type shell-command
 ```
 
+### which - shows the full path of (shell) commands
+
+Which takes one or more arguments. For each of its arguments it prints to
+stdout the full path of the executables that would have been executed
+when this argument had been entered at the shell prompt. It does this by
+searching for an executable or script in the directories listed in the
+environment variable **PATH** using the same algorithm as **bash(1)**.
+
+**SYNOPSIS**
+```bash
+    which [options] [--] programname [...]
+```
+
+**Type**: which is aliased to ``` `alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde' ```. which is ```/usr/bin/which```
+ 
 ### echo - print characters
 
 * echo is a shell builin.
@@ -533,3 +571,146 @@ Display  the  current time in the given FORMAT, or set the system date.
 
 * **%s** = seconds since 1970-01-01 00:00:00 UTC. It's a format.
 * **%N** = nanoseconds (000000000..999999999). It's a format.
+
+## Cryptographic Hash / Checksum
+
+### sha256sum - - compute and check SHA256 message digest
+
+Print or check SHA256 (256-bit) checksums.  With no FILE, or when FILE is -, read standard input.
+
+**SYNOPSIS**
+
+```bash
+    sha256sum [OPTION]... [FILE]...
+```
+
+> pipe can be used where there is a file option in every command.
+
+### head - output the first part of files
+
+Print the first 10 lines of each FILE to standard output.  With more than
+one FILE, precede each with a header giving the file name.  With no FILE,
+or when FILE is -, read standard input.
+
+**SYNOPSIS**
+
+```bash
+    head [OPTION]... [FILE]...
+```
+
+* -c, --bytes=[-]K = print  the first K bytes of each file; with the leading '-', print
+all but the last K bytes of each file
+
+* -n, --lines=[-]K = print the first K lines instead of the first 10; with the  leading
+'-', print all but the last K lines of each file
+
+### hash - Remember or display program locations.
+
+Determine and remember the full pathname of each command NAME.  If no arguments are given, information about remembered commands is displayed.
+
+**Syntax**
+
+```bash
+    hash [-lr] [-p pathname] [-dt] [name ...]
+```
+
+**Type** - hash is a shell builtin
+
+* -r = forget all remembered locations
+
+### shuf - generate random permutations
+
+Write a random permutation of the input lines to standard output.
+
+**SYNOPSIS**
+
+```bash
+    shuf [OPTION]... [FILE]
+    shuf -e [OPTION]... [ARG]...
+    shuf -i LO-HI [OPTION]...
+```
+
+### fold - wrap each input line to fit in specified width
+
+Wrap  input  lines  in  each FILE (standard input by default), writing to standard output.
+
+**SYNOPSIS**
+
+```bash
+    fold [OPTION]... [FILE]...
+```
+
+* -b, --bytes = count bytes rather than columns
+* -c, --characters = count characters rather than columns
+* -s, --spaces = break at spaces
+* -w, --width=WIDTH = use WIDTH columns instead of 80
+
+```bash
+    S = 'hello'
+    echo "$S" | fold -w1
+
+# Output
+## h
+## w
+## l
+## l
+## o
+```
+
+### basename - strip directory and suffix from filenames
+
+Print  NAME with any leading directory components removed. If specified, also remove a trailing SUFFIX.
+
+**SYNOPSIS**
+
+```bash
+    basename NAME [SUFFIX]
+    basename OPTION... NAME...
+```
+* doesn't do any smart checking.
+
+```bash
+    basename /vagrant/luser-demo06.sh 
+
+# Output
+## luser-demo06.sh
+```
+
+### dirname - strip last component from file name
+
+Print  NAME with any leading directory components removed.  If specified, also remove a trailing SUFFIX.
+
+**SYNOPSIS**
+
+```bash
+    basename NAME [SUFFIX]
+    basename OPTION... NAME...
+```
+* doesn't do any smart checking.
+
+```bash
+    dirname /vagrant/luser-demo06.sh 
+
+# Output
+## /vagrant
+```
+
+## Data Munging / String manipulation in bash
+
+Pipe is used for data munging/string manipulation. we can pipe a standard output
+to a command for standard input. multiple pipe can be used in this manner. This is
+how we can do string manipulation.
+
+## Parameter & Argument
+
+A parameter is a variable that is being used inside the shell script.
+
+An Argument is the data passed into the shell script. So an argument is
+applied on the command line becomes the value stored in a parameter.
+
+* ```${0}``` is the very first positional parameter that contains the name of the
+script itself.
+* The next postional parameter is ```${1}``` which stores the value of the
+first argument passed to the script on the command line. The positional
+parameter ```${2}``` stores the second argument, ```${3}``` stores the third
+argument & so on.
