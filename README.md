@@ -261,7 +261,6 @@ variable='valu'     # reassingment
 There are some special variable that are predefined by bash.
 
 * **UID** = Expands to the user ID of the current user, initialized at shell startup.  This variable is readonly.
-* **?** = It holds the exit status of the last command.
 * **HOSTNAME** = contains name of the host.
 * **RANDOM** = Each time this parameter is  referenced,  a random  integer between **0 and 32767** is generated. The sequence of random numbers maybe initialized by assigning a value to **RANDOM**.
 * **PATH** = The search path for commands.  It is  a  colon-separated  list  of directories  in  which  the  shell looks for commands. 
@@ -270,7 +269,9 @@ There are some special variable that are predefined by bash.
 
 The shell treats several parameters specially.  These parameters may only be referenced; assignment to them is not allowed.
 
+* **?** = It holds the exit status of the last command.
 * **#** = Expands to the number of positional parameters in decimal.
+* **@** = Expands  to  the positional parameters, starting from one. When the  expansion  occurs  within  double  quotes,  each parameter  expands  to  a separate word.  That is, "$@" is equivalent to ```"$1" "$2" ...```  
 
 ### Assinging Command Ouput in a variable
 
@@ -714,3 +715,23 @@ script itself.
 first argument passed to the script on the command line. The positional
 parameter ```${2}``` stores the second argument, ```${3}``` stores the third
 argument & so on.
+
+## Loops
+
+### for loop
+
+Execute commands for each member in a list.
+
+The ```for``` loop executes a sequence of commands for each member in a list of items.  If ```in WORDS ...;``` is not present, then ```in "$@"``` is assumed.  For each element in ```WORDS```, ```NAME``` is set to that element, and the COMMANDS are executed.
+
+**Syntex**
+
+```bash
+    for NAME [in WORDS ... ]
+    do 
+        COMMANDS 
+    done
+```
+
+**Type** : for is a shell keyword.
+**Exit Status** : Returns the status of the last command executed.
