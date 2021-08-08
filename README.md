@@ -688,6 +688,7 @@ Print  NAME with any leading directory components removed.  If specified, also r
     basename NAME [SUFFIX]
     basename OPTION... NAME...
 ```
+
 * doesn't do any smart checking.
 
 ```bash
@@ -736,3 +737,57 @@ The ```for``` loop executes a sequence of commands for each member in a list of 
 
 **Type** : for is a shell keyword.
 **Exit Status** : Returns the status of the last command executed.
+
+### While - Execute commands as long as a test succeeds
+
+**Syntax**
+
+```bash
+    while COMMANDS
+    do 
+        COMMANDS
+    done
+```
+
+**Type** : while is a shell keyword.
+**Exit Status** : Returns the status of the last command executed.
+
+### True - Return a successful result
+
+**SYNOPSIS**
+
+```bash
+    true [ignored command line arguments]
+    true OPTION
+```
+
+**Type** : ```true``` is a shell builtin. ```true``` is ```/usr/bin/true```.
+**Exit Status**: Always succeeds.
+
+```bash
+    true
+```
+
+### sleep - delay for a specified amount of time
+
+Pause  for  NUMBER seconds.  SUFFIX may be 's' for seconds (the default), 'm' for  minutes,  'h'  for hours  or  'd'  for days.
+
+**SYNOPSIS**
+
+```bash
+    sleep NUMBER[SUFFIX]...
+    sleep OPTION
+```
+
+**Type** : It is an executable program. ```sleep``` is ```/usr/bin/sleep```.
+
+### shift - Shift positional parameters
+
+Rename the positional parameters ```$N+1,$N+2 ... to $1,$2 ...``` If N is not given, it is assumed to be 1.
+
+```bash
+    shift [n]
+```
+
+**Type** : shift is a shell builtin.
+**Exit Status** : Returns success unless N is negative or greater than ```$#```
