@@ -271,7 +271,8 @@ The shell treats several parameters specially.  These parameters may only be ref
 
 * **?** = It holds the exit status of the last command.
 * **#** = Expands to the number of positional parameters in decimal.
-* **@** = Expands  to  the positional parameters, starting from one. When the  expansion  occurs  within  double  quotes,  each parameter  expands  to  a separate word.  That is, "$@" is equivalent to ```"$1" "$2" ...```  
+* **\*** = Expands  to  the positional parameters, starting from one. When the expansion occurs within double quotes, it expands to  a  single  word with the value of each parameter separated by the first character of the IFS special  variable. That is, ```"$*"``` is equivalent to ```"$1c$2c..."```, where c is the first character of the value of the IFS variable.
+* **@** = Expands  to  the positional parameters, starting from one. When the  expansion  occurs  within  double  quotes,  each parameter  expands  to  a separate word.  That is, ```"$@"``` is equivalent to ```"$1" "$2" ...```  
 
 ### Assinging Command Ouput in a variable
 
