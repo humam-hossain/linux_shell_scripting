@@ -881,3 +881,16 @@ If you don't want to see output on your screen and you don't want to save that o
 ```bash
     command > /dev/null
 ```
+
+## Case Statement -Execute commands based on pattern matching
+
+**Syntax**
+
+```bash
+    case WORD in [PATTERN [| PATTERN]...) COMMANDS ;;]... esac
+```
+
+Selectively execute ```COMMANDS``` based upon ```WORD``` matching ```PATTERN```.  The ```|``` is used to separate multiple patterns.
+
+**Type** : case is a shell keyword.
+**Exit Status** : Returns the status of the last command executed.
