@@ -864,3 +864,20 @@ Normally with the redirection of a file follows the redirection operator. Howeve
     # new way
     head -n1 /etc/passwd /etc/hosts /fakefile &> head.both
 ```
+
+To summarize each new process starts with three open file descriptors.
+
+```bash
+    command &> FILE
+    command |& command
+```
+
+## Null Device/ Bit bucket
+
+The null device is a special file that throws away whatever is sent to it.
+
+If you don't want to see output on your screen and you don't want to save that output to a file either than redirect that ouput to the null device which is located at ```/dev/null```
+
+```bash
+    command > /dev/null
+```
