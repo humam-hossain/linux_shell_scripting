@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Checking if this script is executed with superuser (root) privileges.
-if [[ "UID" -ne 0 ]]
+if [[ "${UID}" -ne 0 ]]
 then
 	echo "You need to be root to create a local user"
 	exit 1

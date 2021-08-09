@@ -324,11 +324,7 @@ type shell-command
 
 ### which - shows the full path of (shell) commands
 
-Which takes one or more arguments. For each of its arguments it prints to
-stdout the full path of the executables that would have been executed
-when this argument had been entered at the shell prompt. It does this by
-searching for an executable or script in the directories listed in the
-environment variable **PATH** using the same algorithm as **bash(1)**.
+Which takes one or more arguments. For each of its arguments it prints to stdout the full path of the executables that would have been executed when this argument had been entered at the shell prompt. It does this by searching for an executable or script in the directories listed in the environment variable **PATH** using the same algorithm as **bash(1)**.
 
 **SYNOPSIS**
 ```bash
@@ -353,6 +349,18 @@ echo "message1"
 # message1
 # message2
 ```
+
+### cat  - concatenate files and print on the standard output
+
+Concatenate FILE(s), or standard input,  to  standard output.
+
+**SYNOPSIS**
+
+```bash
+    cat [OPTION]... [FILE]...
+```
+
+* **-n, --number** : number all output lines
 
 ### help - show help of a command
 
@@ -790,4 +798,69 @@ Rename the positional parameters ```$N+1,$N+2 ... to $1,$2 ...``` If N is not gi
 ```
 
 **Type** : shift is a shell builtin.
-**Exit Status** : Returns success unless N is negative or greater than ```$#```
+**Exit Status** : Returns success unless N is negative or greater than ```$#```.
+
+## I/O
+
+There are 3 types of I/O.
+
+1. Standard Input - by default comes from keyboard. Pipe (|) is another way to give standard input. Redirect standard output is less than sign (<)
+2. Standard Output - by default diplayed to the screen. Greater than sign (>) can redirect standard output. This type of redirection can overright contents. to add contents use double greater than sign (>>).
+3. Standard Error - by default diplayed to the screen.
+
+### File Descriptor
+
+A file descriptor is simply a number that represents an open file.
+It is easier to reference files by name but it's easier for computers to reference them by number by default.
+Every new process starts with three open file descriptors.
+
+1. FD 0 - stdin
+2. FD 1 - stdout
+3. FD 2 - stderr
+
+> FD = File descriptor
+
+Someone may think that by default standard input comes from keyboard but keyboard isn't a file and by default standard output and standard error are displayed to screen but screen isn't a file either. At one level that's true but ***linux practically treats everything as a file***.
+
+Perheps a more accurate description of a file descriptor is that it's a way that a program interacts with files or to other resources that works like files. These other resources include devices such as **keyboard, terminal, screen** and so on.
+This abstraction of treating almost everything like a file allows to do some really powerfull things.
+
+So **file descriptors are like pointers to sources of data or places that data can be written things like keyboads, files, screens** and so on.
+
+Typically file descriptors are set by default so it is used implicitly. For example when we redirect standard input into a command, file descriptor zero is assumed.
+
+```bash
+    read X < /etc/centos-release    # here file desciptor is set to zero by default.
+    echo $X
+
+    #output
+    ##CentOS Linux release 7.4.1708 (Core)
+```
+
+Explicitly using file descriptor in a file operation.
+
+```bash
+    read X 0< /etc/centos-release    # here 0 is the file descriptor set manually.
+    echo $X
+
+    #output
+    ##CentOS Linux release 7.4.1708 (Core)
+```
+
+> Notice that there is no space between file descriptor zero in this case and the redirection operator the less than sign in this case. This is very important.
+> >
+> if you leave a space then what you thought was a file descriptor number that you were specifying ends up being an argument to the command before the redirection operator.
+
+Normally with the redirection of a file follows the redirection operator. However if you want to use a file descriptor instead of a file name use the ampersand(&) symbol.
+
+> There shouldn't be any space between redirection sign and ampersand(&)
+
+```bash
+    # Old way
+    head -n1 /etc/passwd /etc/hosts /fakefile > head.both 2>&1
+```
+
+```bash
+    # new way
+    head -n1 /etc/passwd /etc/hosts /fakefile &> head.both
+```
