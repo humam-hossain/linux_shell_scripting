@@ -887,7 +887,11 @@ If you don't want to see output on your screen and you don't want to save that o
 **Syntax**
 
 ```bash
-    case WORD in [PATTERN [| PATTERN]...) COMMANDS ;;]... esac
+    case WORD in 
+        [PATTERN [| PATTERN]...) 
+            COMMANDS 
+            ;;]... 
+    esac
 ```
 
 Selectively execute ```COMMANDS``` based upon ```WORD``` matching ```PATTERN```.  The ```|``` is used to separate multiple patterns.
